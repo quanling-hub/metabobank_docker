@@ -59,6 +59,13 @@ If you encounter problems during the installation process, you can find solution
 - Docker: https://docs.docker.com/engine/install/
   
 - Docker Compose: https://docs.docker.com/compose/install/
+##### Install wget
+
+###### Centos
+sudo yum install wget
+
+###### Ubuntu
+sudo apt-get install wget
 
 #### Run Metabobank local version
 ##### Obtain software release
