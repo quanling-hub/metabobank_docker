@@ -1,20 +1,24 @@
-version: "3.3"
+version: "0.0.0"
 services:
   omics:
-    image: omics_r43:v2.0
+    image: omics:v2.0
     ports:
        - 6322:6322
+    command: /start.sh
     volumes:
        - /data1:/data1
     networks:
       meta_net:
         ipv4_address: 172.16.1.4
   web:
-    image: smetabobank:v2.1
+    image: metabobank:v2.0
+    pid: host
+    privileged: true
     ports:
        - 8085:8088
     volumes:
        - /metabobank_data:/metabobank_data
+       - /mongodb:/mongodb
        - /data1:/data1
     environment:
        - TZ=Asia/Shanghai
@@ -28,17 +32,17 @@ services:
        - 27027:27027
     environment:
        - TZ=Asia/Shanghai
-    command: /mongodb/bin/mongod_client_free --config /mongodb/conf/mongodb.conf
+    command: /mongodb/bin/mongod_client --config /mongodb/conf/mongodb.conf
     volumes:
        - /mongodb/conf:/mongodb/conf
        - /mongodb/dbs:/mongodb/dbs
        - /mongodb/logs:/mongodb/logs
     networks:
       meta_net:
-        ipv4_address: 172.16.1.3 
+        ipv4_address: 172.16.1.3
 networks:
   meta_net:
     ipam:
       driver: default
       config:
-        - subnet: "172.16.1.0/24"
+        - subnet: "172.16.1.0/24" 
