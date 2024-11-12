@@ -1,4 +1,4 @@
-version: "0.0.0"
+version: "latest"
 services:
   omics:
     image: omics:v2.0
